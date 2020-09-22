@@ -1,13 +1,24 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@import url(./vendor/fonts.css);
+@import url(./vendor/normalize.css);
+@import url(./blocks/btn/btn.css);
+@import url(./blocks/page/page.css);
+@import url(./blocks/header-cover/header-cover.css);
+@import url(./blocks/header/header.css);
+@import url(./blocks/search/search.css);
+@import url(./blocks/preloader/preloader.css);
+@import url(./blocks/circle-preloader/circle-preloader.css);
+@import url(./blocks/no-articles/no-articles.css);
+@import url(./blocks/popup/popup.css);
+@import url(./blocks/form/form.css);
+@import url(./blocks/results/results.css);
+@import url(./blocks/articles-list/articles-list.css);
+@import url(./blocks/article/article.css);
+@import url(./blocks/author/author.css);
+@import url(./blocks/footer/footer.css);
+@import url(./blocks/mobile-menu/mobile-menu.css);
+@import url(./blocks/template/template.css);
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+#root {
+    display: flex;
+    flex-direction: column;
 }
