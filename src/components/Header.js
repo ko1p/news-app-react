@@ -1,6 +1,36 @@
-import React from "react";
+import React, {useEffect, useReducer} from "react";
+import MainApi from "../utils/MainApi";
+import {reducer} from "../index";
+import {initialState} from "../App";
+
 
 export default function Header () {
+    const [state, dispatch] = useReducer(reducer, initialState)
+
+    // const [userName, setUserName] = useState('noName')
+    // const [userEmail, setUserEmail] = useState('')
+    // const [userId, setUserID] = useState('')
+
+    localStorage.setItem('token',
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWY1YzVlMmQzOTg0MzZjNDg3YWI1OWYiLCJpYXQiOjE2MDA4NDc2OTAsImV4cCI6MTYwMTQ1MjQ5MH0.hlldTG0Xswx3qPda7YaUDsVeIuEYYOwAZpAQ1uZu81k')
+    const mainApi = new MainApi('https://api.newsapp.ga')
+
+    useEffect(() => {
+        if (localStorage.getItem('token')) {
+            mainApi.getUserData(localStorage.token)
+                .then(res => res.json())
+                .then(res => {
+                    dispatch({type: 'UPDATE_USER_INFO', payload: {
+                            name: res.data.name,
+                            email: res.data.email,
+                            id: res.data._id,
+                        }})
+                })
+                .catch(e => console.log(e)) // TODO обрабатывать ошибки надо через then
+        }
+        //eslint-disable-next-line
+    }, [])
+
     return (
         <header className="header">
             <div className="header__container header__container_black">
