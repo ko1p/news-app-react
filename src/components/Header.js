@@ -8,7 +8,7 @@ export default function Header () {
     // localStorage.clear()
     localStorage.setItem('token',
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWY1YzVlMmQzOTg0MzZjNDg3YWI1OWYiLCJpYXQiOjE2MDA4NDc2OTAsImV4cCI6MTYwMTQ1MjQ5MH0.hlldTG0Xswx3qPda7YaUDsVeIuEYYOwAZpAQ1uZu81k')
-    const mainApi = new MainApi('https://api.newsapp.ga')
+    const mainApi = new MainApi('https://api.newsapp.ga') // TODO вынести из хедера
 
     useEffect(() => {
         if (localStorage.getItem('token')) {
