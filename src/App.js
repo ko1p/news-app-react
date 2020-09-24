@@ -7,7 +7,7 @@ import NoArticles from "./components/NoArticles";
 import Results from "./components/Results";
 import Author from "./components/Author";
 import Footer from "./components/Footer";
-import Popup from "./components/Popup";
+import Popup from "./components/Popup/Popup";
 import {Context, reducer} from "./index";
 
 export const initialState = {
@@ -21,6 +21,10 @@ export const initialState = {
     search: {},
     loader: {},
     savedArticles: {},
+    popup: {
+        isOpen: false,
+        type: 'signin'
+    }
 }
 
 function App() {

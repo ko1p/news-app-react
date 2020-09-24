@@ -10,8 +10,53 @@ export const Context = createContext()
 
 export const reducer = (state, action) => {
     switch (action.type) {
+        case 'TOGGLE_POPUP': {
+            return {
+                ...state,
+                popup: {
+                    isOpen: true,
+                    type: action.payload
+                }
+            }
+        }
+        case 'CLOSE_POPUP': {
+            return {
+                ...state,
+                popup: {
+                    isOpen: false
+                }
+            }
+        }
+        case 'OPEN_SIGNIN_POPUP':
+            return {
+                ...state,
+                popup: {
+                    isOpen: true,
+                    type: 'signin'
+                }
+            }
+        case 'OPEN_SIGNUP_POPUP':
+            return {
+                ...state,
+                popup: {
+                    isOpen: true,
+                    type: 'signup'
+                }
+            }
+        case 'USER_LOGOUT': {
+            return {
+                ...state,
+                user: {
+                    name: 'noName',
+                    email: '',
+                    id: '',
+                    isLoggedIn: false,
+                }
+            }
+        }
         case 'UPDATE_USER_INFO':
             return {
+                ...state,
                 user: {
                     name: action.payload.name,
                     email: action.payload.email,
