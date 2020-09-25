@@ -15,6 +15,7 @@ export default function Search() {
         e.preventDefault()
         const keyword = e.target.searchInput.value
         fetchNews(keyword)
+        e.target.searchInput.value = ''
     }
 
     return (
