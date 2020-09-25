@@ -5,6 +5,9 @@ import './vendor/normalize.css';
 import './vendor/fonts.css'
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import MainApi from "./utils/MainApi";
+
+export const mainApi = new MainApi('https://api.newsapp.ga') // TODO сделать через конфиг
 
 export const Context = createContext()
 
@@ -54,6 +57,15 @@ export const reducer = (state, action) => {
                 }
             }
         }
+        // case 'USER_LOGIN': {
+        //     return {
+        //         ...state,
+        //         user: {
+        //             ...state.user,
+        //             isLoggedIn: true,
+        //         }
+        //     }
+        // }
         case 'UPDATE_USER_INFO':
             return {
                 ...state,

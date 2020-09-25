@@ -28,7 +28,9 @@ export default function PopupSignup() {
     }
 
     const onSubmitHandler = (e) => {
-        console.log(e.target)
+        e.preventDefault()
+        const formData = Object.fromEntries(new FormData(e.target).entries());
+        console.log(formData)
     }
 
     const formValid = () => {
@@ -58,7 +60,7 @@ export default function PopupSignup() {
     return (
         <div className="popup__container">
             <img onClick={closePopup} className="popup__close" src={closeImg} alt="кнопка закрытия формы"/>
-            <form className="form__signup" name="signin" action="http://httpbin.org/post" method="POST">
+            <form className="form__signup" name="signin" onSubmit={onSubmitHandler} onChange={formValid}>
                 <h3 className="form__heading">Регистрация</h3>
                 <fieldset className="form__fieldset">
                     <div className="form__field">

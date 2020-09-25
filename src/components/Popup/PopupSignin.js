@@ -1,6 +1,6 @@
 import React, {useContext, useState} from "react";
 import closeImg from "../../images/close.svg";
-import {Context} from "../../index";
+import {Context, mainApi} from "../../index";
 
 export default function PopupSignin() {
     const {state, dispatch} = useContext(Context)
@@ -29,7 +29,35 @@ export default function PopupSignin() {
     }
 
     const onSubmitHandler = (e) => {
-        console.log(e.target)
+        e.preventDefault()
+        const formData = Object.fromEntries(new FormData(e.target).entries());
+        console.log(formData)
+        mainApi.signin(formData)
+            .then(res => res.json())
+            .then(res => {
+                if (res.message) {
+                    throw new Error(res.message)
+                } else {
+                    localStorage.setItem('token', res.token)
+                }
+                return res
+            })
+            .then(res => {
+                if (localStorage.getItem('token')) {
+                    mainApi.getUserData(localStorage.token)
+                        .then(res => res.json())
+                        .then(res => {
+                            dispatch({type: 'UPDATE_USER_INFO', payload: {
+                                    name: res.data.name,
+                                    email: res.data.email,
+                                    id: res.data._id,
+                                }})
+                        })
+                        .catch(e => console.log(e)) // TODO обрабатывать ошибки надо через then
+                }
+            })
+            .then(res => dispatch({type: 'CLOSE_POPUP'}))
+            .catch(e => console.error(e))
     }
 
     const formValid = () => {
