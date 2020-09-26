@@ -17,6 +17,7 @@ export const reducer = (state, action) => {
             return {
                 ...state,
                 popup: {
+                    ...state.popup,
                     isOpen: true,
                     type: action.payload
                 }
@@ -26,6 +27,7 @@ export const reducer = (state, action) => {
             return {
                 ...state,
                 popup: {
+                    ...state.popup,
                     isOpen: false
                 }
             }
@@ -34,16 +36,35 @@ export const reducer = (state, action) => {
             return {
                 ...state,
                 popup: {
+                    ...state.popup,
                     isOpen: true,
-                    type: 'signin'
+                    type: 'signin',
                 }
             }
         case 'OPEN_SIGNUP_POPUP':
             return {
                 ...state,
                 popup: {
+                    ...state.popup,
                     isOpen: true,
                     type: 'signup'
+                }
+            }
+        case 'OPEN_SUCCESS_POPUP':
+            return {
+                ...state,
+                popup: {
+                    ...state.popup,
+                    isOpen: true,
+                    type: 'success'
+                }
+            }
+        case 'SET_SERVER_ERROR':
+            return {
+                ...state,
+                popup: {
+                    ...state.popup,
+                    serverError: action.payload
                 }
             }
         case 'USER_LOGOUT': {

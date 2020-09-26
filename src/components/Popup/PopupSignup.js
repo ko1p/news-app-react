@@ -1,6 +1,6 @@
 import React, {useContext, useState} from "react";
 import closeImg from "../../images/close.svg";
-import {Context} from "../../index";
+import {Context, mainApi} from "../../index";
 
 export default function PopupSignup() {
     const {state, dispatch} = useContext(Context)
@@ -31,6 +31,18 @@ export default function PopupSignup() {
         e.preventDefault()
         const formData = Object.fromEntries(new FormData(e.target).entries());
         console.log(formData)
+        mainApi.signup(formData)
+            .then(res => res.json())
+            .then(res => {
+                if (res.data) {
+                    console.log(res.data)
+                    dispatch({type: 'OPEN_SUCCESS_POPUP'})
+                } else if (res.message) {
+                    dispatch({type: 'SET_SERVER_ERROR', payload: res.message})
+                    throw new Error(res.message)
+                }
+            })
+            .catch(e => console.error(e))
     }
 
     const formValid = () => {
@@ -82,7 +94,12 @@ export default function PopupSignup() {
                                placeholder="Введите своё имя" required minLength="2"/>
                         <span className="form__error form__error_name">Имя должно быть длинее 1 символа</span>
                     </div>
-                    <span className="form__error form__error_server">Ошибка с сервера</span>
+                    {
+                        state.popup.serverError ?
+                            <span className='form__error form__error_server form__error_active'>{state.popup.serverError}</span>
+                            :
+                            null
+                    }
                     <button className="btn form__btn" type="submit" disabled={!formValid()}>Зарегистрироваться</button>
                 </fieldset>
                 <p className="form__reference">или <span

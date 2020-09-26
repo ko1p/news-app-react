@@ -36,6 +36,7 @@ export default function PopupSignin() {
             .then(res => res.json())
             .then(res => {
                 if (res.message) {
+                    dispatch({type: 'SET_SERVER_ERROR', payload: res.message})
                     throw new Error(res.message)
                 } else {
                     localStorage.setItem('token', res.token)
@@ -54,6 +55,8 @@ export default function PopupSignin() {
                                 }})
                         })
                         .catch(e => console.log(e)) // TODO обрабатывать ошибки надо через then
+                } else {
+                    throw new Error('Токен не сохранён') // TODO мб удалить
                 }
             })
             .then(res => dispatch({type: 'CLOSE_POPUP'}))
@@ -104,7 +107,12 @@ export default function PopupSignin() {
                         <span
                             className="form__error form__error_email">Пароль должен состоять минимум из 8 символов</span>
                     </div>
-                    <span className="form__error form__error_server ">Ошибка с сервера</span>
+                    {
+                        state.popup.serverError ?
+                            <span className='form__error form__error_server form__error_active'>{state.popup.serverError}</span>
+                            :
+                            null
+                    }
                     <button className="btn form__btn" type="submit" disabled={!formValid()}>Войти</button>
                 </fieldset>
                 <p className="form__reference">или <span

@@ -23,7 +23,8 @@ export const initialState = {
     savedArticles: {},
     popup: {
         isOpen: false,
-        type: 'signin'
+        type: 'signin',
+        serverError: ''
     }
 }
 
