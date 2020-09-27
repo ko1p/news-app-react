@@ -1,14 +1,35 @@
-import React from "react";
+import React, {useContext} from "react";
 import NewsApi from "../utils/NewsApi";
 import {NEWS_API_DAYS, NEWS_API_TOKEN, NEWS_API_URL} from "../constants/config";
+import date from "../utils/date";
+import {Context} from "../index";
 
 export default function Search() {
+    const {state, dispatch} = useContext(Context)
     const newsApi = new NewsApi(NEWS_API_URL, NEWS_API_TOKEN, NEWS_API_DAYS)// TODO вынести из поиска
 
     const fetchNews = (keyword) => {
         newsApi.getNews(keyword)
             .then(res => res.json())
-            .then(res => console.log(res))
+            .then(res => {
+                console.log(res.articles)
+                const articlesFromApi = res.articles
+                const articles = []
+                articlesFromApi.forEach(article => {
+                    const obj = {
+                        keyword: keyword,
+                        title: article.title,
+                        text: article.description,
+                        date: date.cardDateTransform(article.publishedAt),
+                        source: article.source.name,
+                        link: article.url,
+                        image: article.urlToImage,
+                    }
+                    articles.push(obj)
+                })
+                console.log(articles)
+                dispatch({type: 'SAVE_ARTICLES', payload: articles})
+            })
     }
 
     const onSubmitHandler = (e) => {

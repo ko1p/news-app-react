@@ -20,7 +20,7 @@ export const initialState = {
     header: {},
     search: {},
     loader: {},
-    savedArticles: {},
+    savedArticles: [],
     popup: {
         isOpen: false,
         type: 'signin',
@@ -34,13 +34,13 @@ function App() {
     return (
         <Context.Provider value={{state, dispatch}}>
             <main className="page">
-                <HeaderCover/>
-                <Preloader/>
-                <NoArticles/>
-                <Results/>
-                <Author/>
-                <Footer/>
-                <Popup/>
+                <HeaderCover />
+                <Preloader />
+                <NoArticles />
+                <Results />
+                <Author />
+                <Footer />
+                <Popup />
             </main>
         </Context.Provider>
     );

@@ -59,6 +59,11 @@ export const reducer = (state, action) => {
                     type: 'success'
                 }
             }
+        case 'SAVE_ARTICLES':
+            return {
+                ...state,
+                savedArticles: [...action.payload]
+            }
         case 'SET_SERVER_ERROR':
             return {
                 ...state,
