@@ -9,6 +9,7 @@ export default function Search() {
     const newsApi = new NewsApi(NEWS_API_URL, NEWS_API_TOKEN, NEWS_API_DAYS)// TODO вынести из поиска
 
     const fetchNews = (keyword) => {
+        showLoader()
         newsApi.getNews(keyword)
             .then(res => res.json())
             .then(res => {
@@ -23,12 +24,13 @@ export default function Search() {
                         date: date.cardDateTransform(article.publishedAt),
                         source: article.source.name,
                         link: article.url,
-                        image: article.urlToImage,
+                        image: article.urlToImage
                     }
                     articles.push(obj)
                 })
                 console.log(articles)
-                dispatch({type: 'SAVE_ARTICLES', payload: articles})
+                hideLoader()
+                dispatch({type: 'GET_ARTICLES', payload: articles})
             })
     }
 
@@ -37,6 +39,14 @@ export default function Search() {
         const keyword = e.target.searchInput.value
         fetchNews(keyword)
         e.target.searchInput.value = ''
+    }
+
+    const showLoader = () => {
+        dispatch({type: 'SHOW_LOADER'})
+    }
+
+    const hideLoader = () => {
+        dispatch({type: 'HIDE_LOADER'})
     }
 
     return (

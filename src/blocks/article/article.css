@@ -5,6 +5,7 @@
 @import url(./__heading/article__heading.css);
 @import url(./__text/article__text.css);
 @import url(./__source/article__source.css);
+@import url(./__icon/article__icon.css);
 
 .article {
   position: relative;

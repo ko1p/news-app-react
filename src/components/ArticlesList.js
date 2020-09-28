@@ -1,11 +1,16 @@
-import React from "react";
+import React, {useContext} from "react";
 import Article from "./Article";
+import {Context} from "../index";
 
 export default function ArticlesList() {
-
+    const {state} = useContext(Context)
+    console.log('articles', state.articles)
     return (
-        <div className='articles-list'>
-            <Article />
-        </div>
+        state.articles ?
+            <div className='articles-list'>
+                {state.articles.map((article, index) => <Article key={`Article-${index}`} article={article} /> )}
+            </div>
+            :
+            null
     )
 }

@@ -1,0 +1,11 @@
+.article__icon.article__icon_not-loggined {
+    background-image: url('../../../../images/saveIcon_not-hovered.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+@media screen and (min-width: 1180px) {
+    .article__icon_not-loggined:hover ~ .btn__notice {
+        display: block;
+    }
+}

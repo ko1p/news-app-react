@@ -18,9 +18,14 @@ export const initialState = {
         id: '',
     },
     header: {},
-    search: {},
-    loader: {},
-    savedArticles: [],
+    results: {
+        isOpen: false,
+        noResults: false,
+    },
+    loader: {
+        isOpen: false
+    },
+    articles: [],
     popup: {
         isOpen: false,
         type: 'signin',

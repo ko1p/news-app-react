@@ -13,6 +13,23 @@ export const Context = createContext()
 
 export const reducer = (state, action) => {
     switch (action.type) {
+
+        case 'SHOW_LOADER': {
+            return {
+                ...state,
+                loader: {
+                    isOpen: true
+                }
+            }
+        }
+        case 'HIDE_LOADER': {
+            return {
+                ...state,
+                loader: {
+                    isOpen: false
+                }
+            }
+        }
         case 'TOGGLE_POPUP': {
             return {
                 ...state,
@@ -59,10 +76,14 @@ export const reducer = (state, action) => {
                     type: 'success'
                 }
             }
-        case 'SAVE_ARTICLES':
+        case 'GET_ARTICLES':
             return {
                 ...state,
-                savedArticles: [...action.payload]
+                articles: [...action.payload],
+                results: {
+                    ...state.results,
+                    isOpen: true
+                }
             }
         case 'SET_SERVER_ERROR':
             return {
