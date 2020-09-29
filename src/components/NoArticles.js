@@ -4,7 +4,6 @@ import {Context} from "../index";
 
 export default function NoArticles() {
     const {state} = useContext(Context)
-    console.log(state.results.noResults)
 
     const noResults =
         <div className="no-articles no-articles_is-opened">

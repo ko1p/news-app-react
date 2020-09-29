@@ -5,7 +5,7 @@ import date from "../utils/date";
 import {Context} from "../index";
 
 export default function Search() {
-    const {state, dispatch} = useContext(Context)
+    const {dispatch} = useContext(Context)
     const newsApi = new NewsApi(NEWS_API_URL, NEWS_API_TOKEN, NEWS_API_DAYS)// TODO вынести из поиска
 
     const fetchNews = (keyword) => {
@@ -13,7 +13,6 @@ export default function Search() {
         newsApi.getNews(keyword)
             .then(res => res.json())
             .then(res => {
-                console.log(res.articles)
                 const articlesFromApi = res.articles
                 const articles = []
                 articlesFromApi.forEach(article => {
@@ -28,7 +27,6 @@ export default function Search() {
                     }
                     articles.push(obj)
                 })
-                console.log(articles)
                 hideLoader()
                 dispatch({type: 'GET_ARTICLES', payload: articles})
             })

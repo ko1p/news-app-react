@@ -3,7 +3,7 @@ import {Context} from "../index";
 
 export default function Preloader () {
     const {state} = useContext(Context)
-    console.log(state)
+
     return (
         state.loader.isOpen
             ?

@@ -1,53 +1,26 @@
 import React, {useReducer} from 'react';
 import './App.css';
 
-import HeaderCover from "./components/HeaderCover";
-import Preloader from "./components/Preloader";
-import NoArticles from "./components/NoArticles";
-import Results from "./components/Results";
-import Author from "./components/Author";
-import Footer from "./components/Footer";
-import Popup from "./components/Popup/Popup";
-import {Context, reducer} from "./index";
+import {Context, initialState, reducer} from "./index";
+import {Route, Switch} from "react-router-dom";
+import NotFound from "./components/pages/NotFoundPage";
+import MainPage from "./components/pages/MainPage";
+import ArticlesPage from "./components/pages/ArticlesPage";
 
-export const initialState = {
-    user: {
-        name: 'noName',
-        email: '',
-        isLoggedIn: false,
-        id: '',
-    },
-    header: {},
-    results: {
-        isOpen: false,
-        noResults: false,
-    },
-    loader: {
-        isOpen: false
-    },
-    articles: [],
-    popup: {
-        isOpen: false,
-        type: 'signin',
-        serverError: ''
-    }
-}
+
 
 function App() {
     const [state, dispatch] = useReducer(reducer, initialState)
 
     return (
-        <Context.Provider value={{state, dispatch}}>
-            <main className="page">
-                <HeaderCover />
-                <Preloader />
-                <NoArticles />
-                <Results />
-                <Author />
-                <Footer />
-                <Popup />
-            </main>
-        </Context.Provider>
+            <Context.Provider value={{state, dispatch}}>
+                <Switch>
+                    <Route exact path='/' component={MainPage}/>
+                    <Route path='/articles' component={ArticlesPage} />
+                    <Route component={NotFound} />
+                </Switch>
+            </Context.Provider>
+
     );
 }
 

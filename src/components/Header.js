@@ -1,5 +1,6 @@
 import React, {useContext, useEffect} from "react";
 import {Context, mainApi} from "../index";
+import {NavLink} from 'react-router-dom'
 
 export default function Header () {
     const {state, dispatch} = useContext(Context)
@@ -35,11 +36,11 @@ export default function Header () {
             <div className="header__container header__container_black">
                 <p className="header__logo">NewsExplorer</p>
                 <nav className="header__navigation">
-                    <a className="header__nav-link header__nav-link_active" href="./index.html">Главная</a>
+                    <NavLink className="header__nav-link" exact to="/" activeClassName="header__nav-link_active">Главная</NavLink>
                     {state.user.isLoggedIn ?
                         <>
-                            <a className="header__nav-link header__nav-link_not-active"
-                               href="./articles.html">Сохраненные статьи</a>
+                            <NavLink className="header__nav-link" activeClassName="header__nav-link_active"
+                               to="/articles">Сохраненные статьи</NavLink>
                                 <button
                                     onClick={userLogout}
                                     className="btn btn__logout header__nav-link header__nav-logout">{state.user.name}

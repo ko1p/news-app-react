@@ -1,5 +1,6 @@
 import React, {createContext} from 'react';
 import ReactDOM from 'react-dom';
+import {BrowserRouter} from 'react-router-dom'
 import './index.css';
 import './vendor/normalize.css';
 import './vendor/fonts.css'
@@ -104,15 +105,6 @@ export const reducer = (state, action) => {
                 }
             }
         }
-        // case 'USER_LOGIN': {
-        //     return {
-        //         ...state,
-        //         user: {
-        //             ...state.user,
-        //             isLoggedIn: true,
-        //         }
-        //     }
-        // }
         case 'UPDATE_USER_INFO':
             return {
                 ...state,
@@ -128,15 +120,37 @@ export const reducer = (state, action) => {
     }
 }
 
+export const initialState = {
+    user: {
+        name: 'noName',
+        email: '',
+        isLoggedIn: false,
+        id: '',
+    },
+    header: {},
+    results: {
+        isOpen: false,
+        noResults: false,
+    },
+    loader: {
+        isOpen: false
+    },
+    articles: [],
+    popup: {
+        isOpen: false,
+        type: 'signin',
+        serverError: ''
+    }
+}
+
 
 ReactDOM.render(
-    <React.StrictMode>
-        <App/>
-    </React.StrictMode>,
+    <BrowserRouter>
+        <React.StrictMode>
+                <App />
+        </React.StrictMode>
+    </BrowserRouter>,
     document.getElementById('root')
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();

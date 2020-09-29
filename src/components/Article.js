@@ -5,22 +5,23 @@ export default function Article ({article}) {
     const cls = []
     const [isArticleSave, setIsArticleSave] = useState(false)
     const [cardId, setCardId] = useState('')
-    const {state, dispatch} = useContext(Context)
+    const {state} = useContext(Context)
 
     const toggleSaveArticle = () => {
         if (cardId) {
             mainApi.removeArticle(cardId)
                 .then(res => res.json())
                 .then(res => {
-                    setCardId('')
+                    setCardId('') // TODO продумать
                     setIsArticleSave(prevState => !isArticleSave)
                 })
+                .catch(e => console.error(e.message))
         } else {
             mainApi.createArticle(article)
                 .then(res => res.json())
                 .then(res => res.data)
                 .then(res => {
-                    setCardId(res._id)
+                    setCardId(res._id) // TODO продумать
                     setIsArticleSave(prevState => !isArticleSave)
                 })
                 .catch(e => console.error(e.message))
@@ -51,7 +52,7 @@ export default function Article ({article}) {
             }
             <button className="btn__notice ">Войдите, чтобы сохранять статьи</button>
             <button className="btn__keyword ">{article.keyword}</button>
-            <a className="article__link" href={article.link}
+            <a className="article__link" href={article.link} rel="noopener noreferrer"
                target="_blank">
                 <div style={{backgroundImage: `url(${article.image})`}} className="article__image" />
                 <div className="article__container>">
