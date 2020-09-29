@@ -16,7 +16,7 @@ function App() {
             <Context.Provider value={{state, dispatch}}>
                 <Switch>
                     <Route exact path='/' component={MainPage}/>
-                    <Route path='/articles' component={ArticlesPage} />
+                    <Route exact path='/articles' component={ArticlesPage} />
                     <Route component={NotFound} />
                 </Switch>
             </Context.Provider>

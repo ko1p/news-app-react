@@ -7,10 +7,11 @@ import Author from "../Author";
 import Footer from "../Footer";
 import Popup from "../Popup/Popup";
 
-export default function MainPage () {
+export default function MainPage (props) {
+    const path = props.location.pathname
     return (
         <main className="page">
-            <HeaderCover />
+            <HeaderCover path={path} />
             <Preloader />
             <NoArticles />
             <Results />

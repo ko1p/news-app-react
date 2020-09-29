@@ -1,17 +1,14 @@
 import React from "react";
-import HeaderCover from "../HeaderCover";
-import Preloader from "../Preloader";
 import NoArticles from "../NoArticles";
-import Results from "../Results";
 import Footer from "../Footer";
+import Header from "../Header";
 
-export default function ArticlePage () {
+export default function ArticlePage (props) {
+    const path = props.location.pathname
     return (
         <main className="page">
-            <HeaderCover />
-            <h1>This is second page</h1>
+            <Header path={path}/>
             <NoArticles />
-            <Results />
             <Footer />
         </main>
     )

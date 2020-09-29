@@ -2,13 +2,16 @@ import React, {useContext, useEffect} from "react";
 import {Context, mainApi} from "../index";
 import {NavLink} from 'react-router-dom'
 
-export default function Header () {
+export default function Header ({path}) {
     const {state, dispatch} = useContext(Context)
 
-    // localStorage.clear()
-    // localStorage.setItem('token',
-    //     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWY1YzVlMmQzOTg0MzZjNDg3YWI1OWYiLCJpYXQiOjE2MDA4NDc2OTAsImV4cCI6MTYwMTQ1MjQ5MH0.hlldTG0Xswx3qPda7YaUDsVeIuEYYOwAZpAQ1uZu81k')
+    const cls = []
 
+    if (path === '/') {
+        cls.push('header')
+    } else {
+        cls.push('header header_white')
+    }
 
     useEffect(() => {
         if (localStorage.getItem('token')) {
@@ -32,7 +35,7 @@ export default function Header () {
     }
 
     return (
-        <header className="header">
+        <header className={cls.join(' ')}>
             <div className="header__container header__container_black">
                 <p className="header__logo">NewsExplorer</p>
                 <nav className="header__navigation">

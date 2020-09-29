@@ -6,13 +6,12 @@
   content: '';
   position: relative;
   display: block;
-  border: 2px solid;
-  top: 23px;
-  display: block;
+  border: 1px solid;
+  top: 24px;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {
 	.header__nav-link_active::after {
-    top: 20px;
+    top: 19px;
   }
 }
