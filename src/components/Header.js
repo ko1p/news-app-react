@@ -7,7 +7,7 @@ export default function Header ({path}) {
 
     const cls = []
 
-    if (path === '/') {
+    if (state.currentPath === '/') {
         cls.push('header')
     } else {
         cls.push('header header_white')

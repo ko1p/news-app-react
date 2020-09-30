@@ -1,6 +1,7 @@
 @import url('./_not-loggined/article__icon_not-loggined.css');
 @import url('./_loggined/article__icon_loggined.css');
 @import url('./_marked/article__icon_marked.css');
+@import url('./_delete/article__icon_delete.css');
 
 .article__icon {
     position: absolute;

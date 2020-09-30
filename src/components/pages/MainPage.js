@@ -1,20 +1,26 @@
-import React from "react";
+import React, {useContext, useEffect} from "react";
 import HeaderCover from "../HeaderCover";
 import Preloader from "../Preloader";
 import NoArticles from "../NoArticles";
-import Results from "../Results";
+import SearchResults from "../SearchResults";
 import Author from "../Author";
 import Footer from "../Footer";
 import Popup from "../Popup/Popup";
+import {Context} from "../../index";
 
 export default function MainPage (props) {
+    const {dispatch} = useContext(Context)
     const path = props.location.pathname
+    useEffect(() => {
+        dispatch({type: 'SET_CURRENT_PATH', payload: path})
+    }, [path, dispatch]) // TODO подумать оставить так или добавить исключение в линтер
+
     return (
         <main className="page">
-            <HeaderCover path={path} />
+            <HeaderCover />
             <Preloader />
             <NoArticles />
-            <Results />
+            <SearchResults />
             <Author />
             <Footer />
             <Popup />

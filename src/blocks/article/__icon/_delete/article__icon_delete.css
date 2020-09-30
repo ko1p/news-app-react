@@ -1,0 +1,9 @@
+.article__icon.article__icon_delete {
+    background-image: url('../../../../images/deleteIcon_not-hovered.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.article__icon.article__icon_delete:hover {
+    background-image: url('../../../../images/deleteIcon_not-hovered.svg');
+}

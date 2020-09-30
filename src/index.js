@@ -14,7 +14,12 @@ export const Context = createContext()
 
 export const reducer = (state, action) => {
     switch (action.type) {
-
+        case 'SET_CURRENT_PATH': {
+            return {
+                ...state,
+                currentPath: action.payload
+            }
+        }
         case 'SHOW_LOADER': {
             return {
                 ...state,
@@ -77,6 +82,12 @@ export const reducer = (state, action) => {
                     type: 'success'
                 }
             }
+        case 'GET_SAVED_ARTICLES': {
+            return {
+                ...state,
+                savedArticles: action.payload
+            }
+        }
         case 'GET_ARTICLES':
             return {
                 ...state,
@@ -121,6 +132,7 @@ export const reducer = (state, action) => {
 }
 
 export const initialState = {
+    currentPath: '/',
     user: {
         name: 'noName',
         email: '',
@@ -136,6 +148,7 @@ export const initialState = {
         isOpen: false
     },
     articles: [],
+    savedArticles: [],
     popup: {
         isOpen: false,
         type: 'signin',

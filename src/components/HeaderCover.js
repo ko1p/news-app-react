@@ -5,7 +5,7 @@ import Search from "./Search";
 export default function HeaderCover({path}) {
     return (
         <section className="header-cover">
-            <Header path={path}/>
+            <Header />
             <Search />
         </section>
     )
