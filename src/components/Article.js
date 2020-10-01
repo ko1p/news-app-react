@@ -1,21 +1,25 @@
-import React, {useContext, useState} from "react";
+import React, {useContext} from "react";
 import {Context, mainApi} from "../index";
 
 export default function Article({article}) {
-    const {state} = useContext(Context)
+    const {state, dispatch} = useContext(Context)
     const path = state.currentPath
     const cls = []
-    const [isArticleSave, setIsArticleSave] = useState(false)
-    const [isArticleDelete, setIsArticleDelete] = useState(false)
-    const [cardId, setCardId] = useState('')
 
     const toggleSaveArticle = () => {
-        if (cardId) {
-            mainApi.removeArticle(cardId)
+        if (article.isSaved) {
+            mainApi.removeArticle(article._id)
                 .then(res => res.json())
                 .then(res => {
-                    setCardId('') // TODO продумать, переделать на article._id
-                    setIsArticleSave(prevState => !isArticleSave)
+                    const articlesArray = [...state.articles]
+                    const newArticlesArray = articlesArray.map(item => {
+                        if (item.index === article.index) {
+                            item.isSaved = false
+                            return item
+                        }
+                        return item
+                    })
+                    dispatch({type: 'TOGGLE_SAVE_ARTICLE', payload: newArticlesArray})
                 })
                 .catch(e => console.error(e.message))
         } else {
@@ -23,19 +27,28 @@ export default function Article({article}) {
                 .then(res => res.json())
                 .then(res => res.data)
                 .then(res => {
-                    setCardId(res._id) // TODO продумать
-                    setIsArticleSave(prevState => !prevState)
+                    const articlesArray = [...state.articles]
+                    const newArticlesArray= articlesArray.map(item => {
+                        if (item.index === article.index) {
+                            item.isSaved = true
+                            return item
+                        }
+                        return item
+                    })
+                    dispatch({type: 'TOGGLE_SAVE_ARTICLE', payload: newArticlesArray})
                 })
                 .catch(e => console.error(e.message))
         }
     }
 
     const deleteArticle = () => {
-        const cardId = article._id
-        mainApi.removeArticle(cardId)
+        const articlesArray = [...state.savedArticles]
+        const newArticlesArray= articlesArray.filter(item => item._id !== article._id)
+        console.log(newArticlesArray)
+        mainApi.removeArticle(article._id)
             .then(res => res.json())
             .then(res => {
-                setIsArticleDelete(prevState => !prevState)
+                dispatch({type: 'REMOVE_CARD', payload: newArticlesArray})
             })
             .catch(e => console.error(e))
     }
@@ -53,9 +66,9 @@ export default function Article({article}) {
     return (
         path === '/'
             ?
-            <div className="article" data-id={cardId || null}>
+            <div className="article" data-id={article._id || null}>
                 {
-                    isArticleSave ?
+                    article.isSaved ?
                         <div className={cls.concat('article__icon_marked').join(' ')} onClick={toggleSaveArticle}/>
                         :
                         <div className={cls.join(' ')} onClick={toggleSaveArticle}/>
@@ -73,7 +86,6 @@ export default function Article({article}) {
                 </a>
             </div>
             :
-            isArticleDelete ? null :
             <div className="article" data-id={article._id || null}>
                 <div className={cls.join(' ')} onClick={deleteArticle}/>
                 <button className="btn__keyword ">{article.keyword}</button>

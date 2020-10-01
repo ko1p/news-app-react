@@ -34,6 +34,10 @@ export default function Header ({path}) {
         dispatch({type: 'USER_LOGOUT'})
     }
 
+    const clearSerchResults = () => {
+        dispatch({type: 'CLEAR_SEARCH_RESULTS'})
+    }
+
     return (
         <header className={cls.join(' ')}>
             <div className="header__container header__container_black">
@@ -43,7 +47,7 @@ export default function Header ({path}) {
                     {state.user.isLoggedIn ?
                         <>
                             <NavLink className="header__nav-link" activeClassName="header__nav-link_active"
-                               to="/articles">Сохраненные статьи</NavLink>
+                               to="/articles" onClick={clearSerchResults}>Сохраненные статьи</NavLink>
                                 <button
                                     onClick={userLogout}
                                     className="btn btn__logout header__nav-link header__nav-logout">{state.user.name}

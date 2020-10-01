@@ -12,6 +12,31 @@ export const mainApi = new MainApi('https://api.newsapp.ga') // TODO сдела�
 
 export const Context = createContext()
 
+export const initialState = {
+    currentPath: '/',
+    user: {
+        name: 'noName',
+        email: '',
+        isLoggedIn: false,
+        id: '',
+    },
+    header: {},
+    results: {
+        isOpen: false,
+        noResults: false,
+    },
+    loader: {
+        isOpen: false
+    },
+    articles: [],
+    savedArticles: [],
+    popup: {
+        isOpen: false,
+        type: 'signin',
+        serverError: ''
+    }
+}
+
 export const reducer = (state, action) => {
     switch (action.type) {
         case 'SET_CURRENT_PATH': {
@@ -97,6 +122,18 @@ export const reducer = (state, action) => {
                     isOpen: true
                 }
             }
+        case 'CLEAR_SEARCH_RESULTS': {
+            return  {
+                ...state,
+                articles: [
+                    ...initialState.articles
+                ],
+                results: {
+                    ...state.results,
+                    isOpen: false
+                }
+            }
+        }
         case 'SET_SERVER_ERROR':
             return {
                 ...state,
@@ -126,41 +163,57 @@ export const reducer = (state, action) => {
                     isLoggedIn: true,
                 }
             }
+        case 'TOGGLE_SAVE_ARTICLE': {
+            return {
+                ...state,
+                articles: [
+                    ...action.payload
+                ]
+            }
+        }
+        case 'REMOVE_CARD': {
+            return {
+                ...state,
+                savedArticles: [
+                    ...action.payload
+                ]
+            }
+        }
         default:
             return state
     }
 }
 
-export const initialState = {
-    currentPath: '/',
-    user: {
-        name: 'noName',
-        email: '',
-        isLoggedIn: false,
-        id: '',
-    },
-    header: {},
-    results: {
-        isOpen: false,
-        noResults: false,
-    },
-    loader: {
-        isOpen: false
-    },
-    articles: [],
-    savedArticles: [],
-    popup: {
-        isOpen: false,
-        type: 'signin',
-        serverError: ''
-    }
-}
+// export const initialState = {
+//     currentPath: '/',
+//     user: {
+//         name: 'noName',
+//         email: '',
+//         isLoggedIn: false,
+//         id: '',
+//     },
+//     header: {},
+//     results: {
+//         isOpen: false,
+//         noResults: false,
+//     },
+//     loader: {
+//         isOpen: false
+//     },
+//     articles: [],
+//     savedArticles: [],
+//     popup: {
+//         isOpen: false,
+//         type: 'signin',
+//         serverError: ''
+//     }
+// }
 
 
 ReactDOM.render(
     <BrowserRouter>
         <React.StrictMode>
-            <App />
+            <App/>
         </React.StrictMode>
     </BrowserRouter>,
     document.getElementById('root')

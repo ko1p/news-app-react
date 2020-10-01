@@ -51,7 +51,12 @@ export default function SavedArticles() {
             <div className="results__info">
                 <p className="results__reference">Сохранённые статьи</p>
                 <h2 className="results__title">У вас {state.savedArticles.length} сохранённых статей</h2>
-                <p className="results__keywords">По ключевым словам: {keywordsResultMessage()}</p>
+                {
+                    state.savedArticles.length === 0 ?
+                        null
+                        :
+                        <p className="results__keywords">По ключевым словам: {keywordsResultMessage()}</p>
+                }
             </div>
             <ArticlesList articles={state.savedArticles} />
         </section>

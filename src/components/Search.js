@@ -15,7 +15,7 @@ export default function Search() {
             .then(res => {
                 const articlesFromApi = res.articles
                 const articles = []
-                articlesFromApi.forEach(article => {
+                articlesFromApi.forEach((article, index) => {
                     const obj = {
                         keyword: keyword,
                         title: article.title,
@@ -23,7 +23,9 @@ export default function Search() {
                         date: date.cardDateTransform(article.publishedAt),
                         source: article.source.name,
                         link: article.url,
-                        image: article.urlToImage
+                        image: article.urlToImage,
+                        isSaved: false,
+                        index: index,
                     }
                     articles.push(obj)
                 })
@@ -34,6 +36,7 @@ export default function Search() {
 
     const onSubmitHandler = (e) => {
         e.preventDefault()
+        dispatch({type: 'CLEAR_SEARCH_RESULTS'})
         const keyword = e.target.searchInput.value
         fetchNews(keyword)
         e.target.searchInput.value = ''
