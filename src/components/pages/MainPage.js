@@ -13,7 +13,6 @@ export default function MainPage (props) {
     const path = props.location.pathname
     useEffect(() => {
         dispatch({type: 'SET_CURRENT_PATH', payload: path})
-        // dispatch({type: 'CLEAR_SEARCH_RESULTS'})
     }, [path, dispatch]) // TODO подумать оставить так или добавить исключение в линтер
 
     return (

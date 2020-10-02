@@ -4,7 +4,6 @@ import {Context, mainApi} from "../index";
 
 export default function SavedArticles() {
     const {state, dispatch} = useContext(Context)
-
     const keywordsResultMessage = () => {
         let message
         const savedArticles = state.savedArticles
@@ -19,7 +18,7 @@ export default function SavedArticles() {
             return acc;
         }, {});
 
-        const array = Object.entries(keywordsResult).sort((a,b) => b[1] - a[1])
+        const array = Object.entries(keywordsResult).sort((a, b) => b[1] - a[1])
 
         if (array.length <= 3) {
             let keywords = '';
@@ -50,7 +49,12 @@ export default function SavedArticles() {
         <section className="results results_is-opened">
             <div className="results__info">
                 <p className="results__reference">Сохранённые статьи</p>
-                <h2 className="results__title">У вас {state.savedArticles.length} сохранённых статей</h2>
+                <h2 className="results__title">У вас {
+
+                    state.savedArticles.length === 0 ?
+                        'нет'
+                        :
+                        state.savedArticles.length} сохранённых статей</h2>
                 {
                     state.savedArticles.length === 0 ?
                         null
@@ -58,7 +62,7 @@ export default function SavedArticles() {
                         <p className="results__keywords">По ключевым словам: {keywordsResultMessage()}</p>
                 }
             </div>
-            <ArticlesList articles={state.savedArticles} />
+            <ArticlesList articles={state.savedArticles}/>
         </section>
     )
 }

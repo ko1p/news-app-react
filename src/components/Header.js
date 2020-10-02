@@ -2,13 +2,13 @@ import React, {useContext, useEffect} from "react";
 import {Context, mainApi} from "../index";
 import {NavLink} from 'react-router-dom'
 
-export default function Header ({path}) {
+export default function Header () {
     const {state, dispatch} = useContext(Context)
-
+    const path = state.currentPath
     const cls = []
 
-    if (state.currentPath === '/') {
-        cls.push('header')
+    if (path === '/') {
+        cls.push('header header_black')
     } else {
         cls.push('header header_white')
     }
@@ -35,7 +35,11 @@ export default function Header ({path}) {
     }
 
     const clearSerchResults = () => {
-        dispatch({type: 'CLEAR_SEARCH_RESULTS'})
+        dispatch({type: 'CLEAR_SEARCH_RESULTS'}) // TODO отпимизировать закрытие попапа и очистка поисковых запросов
+    }
+
+    const openMobileMenu = () => {
+        dispatch({type: 'OPEN_MOBILE_MENU_POPUP'})
     }
 
     return (
@@ -64,11 +68,11 @@ export default function Header ({path}) {
                             onClick={() => dispatch({type: 'OPEN_SIGNIN_POPUP'})}
                             className="btn btn__auth header__nav-link">Авторизоваться</button>
                     }
-                    <button className="btn btn__mobile-menu">
+                    <button className="btn btn__mobile-menu" onClick={openMobileMenu}>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
-                            <rect x="4" y="8" width="16" height="2" fill="white"/>
-                            <rect x="4" y="14" width="16" height="2" fill="white"/>
+                            <rect x="4" y="8" width="16" height="2" fill={path === '/' ? 'white' : 'black'}/>
+                            <rect x="4" y="14" width="16" height="2" fill={path === '/' ? 'white' : 'black'}/>
                         </svg>
                     </button>
                 </nav>

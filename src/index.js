@@ -20,7 +20,9 @@ export const initialState = {
         isLoggedIn: false,
         id: '',
     },
-    header: {},
+    mobileMenu: {
+        isOpen: false,
+    },
     results: {
         isOpen: false,
         noResults: false,
@@ -105,6 +107,15 @@ export const reducer = (state, action) => {
                     ...state.popup,
                     isOpen: true,
                     type: 'success'
+                }
+            }
+        case 'OPEN_MOBILE_MENU_POPUP':
+            return {
+                ...state,
+                popup: {
+                    ...state.popup,
+                    isOpen: true,
+                    type: 'mobile-menu'
                 }
             }
         case 'GET_SAVED_ARTICLES': {

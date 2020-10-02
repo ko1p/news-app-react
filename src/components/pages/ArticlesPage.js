@@ -4,6 +4,7 @@ import Footer from "../Footer";
 import Header from "../Header";
 import {Context} from "../../index";
 import SavedArticles from "../SavedArticles";
+import Popup from "../Popup/Popup";
 
 export default function ArticlePage (props) {
     const {dispatch} = useContext(Context)
@@ -18,6 +19,7 @@ export default function ArticlePage (props) {
             <Header />
             <SavedArticles />
             <NoArticles />
+            <Popup />
             <Footer />
         </main>
     )

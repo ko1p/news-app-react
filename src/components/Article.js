@@ -31,6 +31,7 @@ export default function Article({article}) {
                     const newArticlesArray= articlesArray.map(item => {
                         if (item.index === article.index) {
                             item.isSaved = true
+                            item._id = res._id
                             return item
                         }
                         return item
@@ -44,7 +45,6 @@ export default function Article({article}) {
     const deleteArticle = () => {
         const articlesArray = [...state.savedArticles]
         const newArticlesArray= articlesArray.filter(item => item._id !== article._id)
-        console.log(newArticlesArray)
         mainApi.removeArticle(article._id)
             .then(res => res.json())
             .then(res => {
