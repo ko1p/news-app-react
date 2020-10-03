@@ -86,7 +86,7 @@ export default function PopupSignup() {
                         <input onChange={inputHandler} className="form__input" type="password" name="password" id="signup__password"
                                placeholder="Введите пароль" required minLength="8"/>
                         <span
-                            className="form__error form__error_email">Пароль должен состоять минимум из 8 символов</span>
+                            className="form__error form__error_email">Минимальная длина пароля 8 символов</span>
                     </div>
                     <div className="form__field">
                         <label className="form__label" htmlFor="signup__name">Имя</label>

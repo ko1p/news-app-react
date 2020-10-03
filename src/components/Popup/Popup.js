@@ -1,16 +1,32 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import {Context} from "../../index";
 import PopupSignin from "./PopupSignin";
 import PopupSignup from "./PopupSignup";
 import PopupSuccess from "./PopupSuccess";
 import PopupMobileMenu from "./PopupMobileMenu";
 
-
 export default function Popup() {
     const {state, dispatch} = useContext(Context)
 
-    const closePopup = () => {
-        dispatch({type: 'CLOSE_POPUP'})
+    useEffect(() => {
+        document.addEventListener('click', handleClickOutside)
+        document.addEventListener('keydown', handleEscPress)
+        return () => {
+            document.removeEventListener('click', handleClickOutside)
+            document.removeEventListener('keydown', handleEscPress)
+        }
+    })
+
+    const handleEscPress = event => {
+        if (event.key === 'Escape') {
+            dispatch({type: 'CLOSE_POPUP'})
+        }
+    }
+
+    const handleClickOutside = event => {
+        if (event.target.classList.contains('popup')) {
+            dispatch({type: 'CLOSE_POPUP'})
+        }
     }
 
     const renderPopupType = (type) => {
@@ -27,7 +43,7 @@ export default function Popup() {
         <>
             {
                 state.popup.isOpen ?
-                    <div className='popup popup_is-opened' onClick={closePopup}>
+                    <div className='popup popup_is-opened'>
                         {
                             renderPopupType(state.popup.type)
                         }

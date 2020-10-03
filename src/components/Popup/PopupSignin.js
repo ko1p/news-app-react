@@ -105,7 +105,7 @@ export default function PopupSignin() {
                         <input onChange={inputHandler} className="form__input" type="password" name="password" id="signin__password"
                                placeholder="Введите пароль" required minLength="8"/>
                         <span
-                            className="form__error form__error_email">Пароль должен состоять минимум из 8 символов</span>
+                            className="form__error form__error_email">Минимальная длина пароля 8 символов</span>
                     </div>
                     {
                         state.popup.serverError ?
