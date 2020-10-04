@@ -68,12 +68,17 @@ export default function Article({article}) {
             ?
             <div className="article" data-id={article._id || null}>
                 {
-                    article.isSaved ?
-                        <div className={cls.concat('article__icon_marked').join(' ')} onClick={toggleSaveArticle}/>
+                    state.user.isLoggedIn ?
+                        article.isSaved  ?
+                            <div className='article__icon article__icon_loggined article__icon_marked' onClick={toggleSaveArticle} />
+                            :
+                            <div className='article__icon article__icon_loggined' onClick={toggleSaveArticle}/>
                         :
-                        <div className={cls.join(' ')} onClick={toggleSaveArticle}/>
+                        <>
+                            <div className='article__icon article__icon_not-loggined' />
+                            <button className="btn__notice ">Войдите, чтобы сохранять статьи</button>
+                        </>
                 }
-                <button className="btn__notice ">Войдите, чтобы сохранять статьи</button>
                 <a className="article__link" href={article.link} rel="noopener noreferrer"
                    target="_blank">
                     <div style={{backgroundImage: `url(${article.image})`}} className="article__image"/>
@@ -87,7 +92,7 @@ export default function Article({article}) {
             </div>
             :
             <div className="article" data-id={article._id || null}>
-                <div className={cls.join(' ')} onClick={deleteArticle}/>
+                <div className='btn__delete' onClick={deleteArticle}/>
                 <button className="btn__keyword ">{article.keyword}</button>
                 <a className="article__link" href={article.link} rel="noopener noreferrer"
                    target="_blank">

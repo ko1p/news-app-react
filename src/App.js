@@ -1,6 +1,6 @@
 import React, {useReducer} from 'react';
+import {withRouter} from 'react-router'
 import './App.css';
-
 import {Context, initialState, reducer} from "./index";
 import {Route, Switch, Redirect} from "react-router-dom";
 import NotFound from "./components/pages/NotFoundPage";
@@ -13,9 +13,9 @@ function App() {
     return (
             <Context.Provider value={{state, dispatch}}>
                 <Switch>
-                    <Route exact path='/' component={MainPage}/>
+                    <Route exact path='/' component={MainPage} />
                     <Route exact path='/articles' >
-                        { !state.user.isLoggedIn ? <Redirect to="/" /> : <ArticlesPage />}
+                        { !state.user.isLoggedIn ? <Redirect to="/" /> : withRouter(ArticlesPage)}
                     </Route>
                     <Route component={NotFound} />
                 </Switch>

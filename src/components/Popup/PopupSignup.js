@@ -35,7 +35,6 @@ export default function PopupSignup() {
             .then(res => res.json())
             .then(res => {
                 if (res.data) {
-                    console.log(res.data)
                     dispatch({type: 'OPEN_SUCCESS_POPUP'})
                 } else if (res.message) {
                     dispatch({type: 'SET_SERVER_ERROR', payload: res.message})

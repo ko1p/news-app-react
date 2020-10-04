@@ -31,7 +31,6 @@ export default function PopupSignin() {
     const onSubmitHandler = (e) => {
         e.preventDefault()
         const formData = Object.fromEntries(new FormData(e.target).entries());
-        console.log(formData)
         mainApi.signin(formData)
             .then(res => res.json())
             .then(res => {
