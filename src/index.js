@@ -196,7 +196,7 @@ export const reducer = (state, action) => {
                 ...state,
                 results: {
                     ...state.results,
-                    numOfRenderedCards: state.results.numOfRenderedCards + 3
+                    numOfRenderedCards: state.results.numOfRenderedCards + 3 // TODO вынести тройку в конфиг
                 }
             }
         }
