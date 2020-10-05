@@ -26,6 +26,7 @@ export const initialState = {
     results: {
         isOpen: false,
         noResults: false,
+        numOfRenderedCards: 3
     },
     loader: {
         isOpen: false
@@ -188,6 +189,15 @@ export const reducer = (state, action) => {
                 savedArticles: [
                     ...action.payload
                 ]
+            }
+        }
+        case 'SHOW_MORE_ARTICLES': {
+            return {
+                ...state,
+                results: {
+                    ...state.results,
+                    numOfRenderedCards: state.results.numOfRenderedCards + 3
+                }
             }
         }
         default:
