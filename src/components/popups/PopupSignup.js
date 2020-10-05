@@ -1,6 +1,7 @@
 import React, {useContext, useState} from "react";
 import closeImg from "../../images/close.svg";
-import {Context, mainApi} from "../../index";
+import {Context} from "../../state/context";
+import {mainApi} from '../../utils/MainApi'
 
 export default function PopupSignup() {
     const {state, dispatch} = useContext(Context)

@@ -1,7 +1,7 @@
-import React, {useContext} from "react";
+import React, {useContext} from "react"
 import closeIcon from '../../images/close.svg'
-import {Context} from "../../index";
-import {Link} from "react-router-dom";
+import {Context} from "../../state/context"
+import {Link} from "react-router-dom"
 
 export default function PopupMobileMenu() {
     const {dispatch} = useContext(Context)

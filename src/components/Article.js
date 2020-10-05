@@ -1,25 +1,29 @@
-import React, {useContext} from "react";
-import {Context, mainApi} from "../index";
+import React, {useContext} from "react"
+import {Context} from "../state/context"
+import {mainApi} from '../utils/MainApi'
 
 export default function Article({article}) {
     const {state, dispatch} = useContext(Context)
     const path = state.currentPath
-    const cls = []
 
     const toggleSaveArticle = () => {
         if (article.isSaved) {
             mainApi.removeArticle(article._id)
                 .then(res => res.json())
                 .then(res => {
-                    const articlesArray = [...state.articles]
-                    const newArticlesArray = articlesArray.map(item => {
-                        if (item.index === article.index) {
-                            item.isSaved = false
+                    if (!res.message) {
+                        const articlesArray = [...state.articles]
+                        const newArticlesArray = articlesArray.map(item => {
+                            if (item.index === article.index) {
+                                item.isSaved = false
+                                return item
+                            }
                             return item
-                        }
-                        return item
-                    })
-                    dispatch({type: 'TOGGLE_SAVE_ARTICLE', payload: newArticlesArray})
+                        })
+                        dispatch({type: 'TOGGLE_SAVE_ARTICLE', payload: newArticlesArray})
+                    } else {
+                        throw new Error(res.message)
+                    }
                 })
                 .catch(e => console.error(e.message))
         } else {
@@ -47,20 +51,10 @@ export default function Article({article}) {
         const newArticlesArray= articlesArray.filter(item => item._id !== article._id)
         mainApi.removeArticle(article._id)
             .then(res => res.json())
-            .then(res => {
+            .then(() => {
                 dispatch({type: 'REMOVE_CARD', payload: newArticlesArray})
             })
             .catch(e => console.error(e))
-    }
-
-    if (state.user.isLoggedIn) {
-        if (path === '/articles') {
-            cls.push('btn__delete')
-        } else {
-            cls.push('article__icon article__icon_loggined')
-        }
-    } else {
-        cls.push('article__icon article__icon_not-loggined')
     }
 
     return (

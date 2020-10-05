@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
 import closeImg from "../../images/close.svg";
-import {Context} from "../../index";
+import {Context} from "../../state/context";
 
 export default function PopupSuccess() {
     const {dispatch} = useContext(Context)

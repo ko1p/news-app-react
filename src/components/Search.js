@@ -1,12 +1,11 @@
-import React, {useContext} from "react";
-import NewsApi from "../utils/NewsApi";
-import {NEWS_API_DAYS, NEWS_API_TOKEN, NEWS_API_URL} from "../constants/config";
-import date from "../utils/date";
-import {Context} from "../index";
+import React, {useContext} from "react"
+import {Context} from "../state/context"
+import {newsApi} from "../utils/NewsApi"
+import date from "../utils/date"
+
 
 export default function Search() {
     const {dispatch} = useContext(Context)
-    const newsApi = new NewsApi(NEWS_API_URL, NEWS_API_TOKEN, NEWS_API_DAYS)// TODO вынести из поиска
 
     const fetchNews = (keyword) => {
         showLoader()
@@ -37,6 +36,7 @@ export default function Search() {
     const onSubmitHandler = (e) => {
         e.preventDefault()
         dispatch({type: 'CLEAR_SEARCH_RESULTS'})
+        dispatch({type: 'RESET_NUM_OF_RENDERED_CARDS'})
         const keyword = e.target.searchInput.value
         fetchNews(keyword)
         e.target.searchInput.value = ''

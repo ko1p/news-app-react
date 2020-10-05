@@ -1,11 +1,12 @@
-import React, {useReducer} from 'react';
+import React, {useReducer} from 'react'
+import {Route, Switch, Redirect} from "react-router-dom"
 import {withRouter} from 'react-router'
-import './App.css';
-import {Context, initialState, reducer} from "./index";
-import {Route, Switch, Redirect} from "react-router-dom";
-import NotFound from "./components/pages/NotFoundPage";
-import MainPage from "./components/pages/MainPage";
-import ArticlesPage from "./components/pages/ArticlesPage";
+import {initialState} from "./state/initialState"
+import {reducer} from './state/reducer'
+import {Context} from "./state/context"
+import NotFound from "./pages/NotFoundPage"
+import MainPage from "./pages/MainPage"
+import ArticlesPage from "./pages/ArticlesPage"
 
 function App() {
     const [state, dispatch] = useReducer(reducer, initialState)

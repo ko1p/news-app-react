@@ -1,6 +1,7 @@
-import React, {useContext} from "react";
+import React, {useContext} from "react"
+import {Context} from "../state/context"
 import notFoundImage from '../images/not-found.svg'
-import {Context} from "../index";
+
 
 export default function NoArticles() {
     const {state} = useContext(Context)

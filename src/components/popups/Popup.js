@@ -1,5 +1,5 @@
 import React, {useContext, useEffect} from "react";
-import {Context} from "../../index";
+import {Context} from "../../state/context";
 import PopupSignin from "./PopupSignin";
 import PopupSignup from "./PopupSignup";
 import PopupSuccess from "./PopupSuccess";

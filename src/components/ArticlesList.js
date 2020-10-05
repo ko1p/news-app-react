@@ -1,6 +1,6 @@
-import React, {useContext} from "react";
-import Article from "./Article";
-import {Context} from "../index";
+import React, {useContext} from "react"
+import {Context} from "../state/context"
+import Article from "./Article"
 
 export default function ArticlesList({articles}) {
     const {state, dispatch} = useContext(Context)

@@ -1,6 +1,6 @@
-import React, {useContext} from "react";
-import ArticlesList from "./ArticlesList";
-import {Context} from "../index";
+import React, {useContext} from "react"
+import {Context} from "../state/context"
+import ArticlesList from "./ArticlesList"
 
 export default function SearchResults() {
     const {state} = useContext(Context)

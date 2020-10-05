@@ -1,6 +1,7 @@
 import React, {useContext, useState} from "react";
 import closeImg from "../../images/close.svg";
-import {Context, mainApi} from "../../index";
+import {Context} from "../../state/context";
+import {mainApi} from '../../utils/MainApi'
 
 export default function PopupSignin() {
     const {state, dispatch} = useContext(Context)
@@ -42,7 +43,7 @@ export default function PopupSignin() {
                 }
                 return res
             })
-            .then(res => {
+            .then(() => {
                 if (localStorage.getItem('token')) {
                     mainApi.getUserData(localStorage.token)
                         .then(res => res.json())
@@ -52,13 +53,13 @@ export default function PopupSignin() {
                                     email: res.data.email,
                                     id: res.data._id,
                                 }})
+                            dispatch({type: 'CLOSE_POPUP'})
                         })
-                        .catch(e => console.log(e)) // TODO обрабатывать ошибки надо через then
+                        .catch(e => console.log(e))
                 } else {
-                    throw new Error('Токен не сохранён') // TODO мб удалить
+                    throw new Error('Токен не сохранён')
                 }
             })
-            .then(res => dispatch({type: 'CLOSE_POPUP'}))
             .catch(e => console.error(e))
     }
 

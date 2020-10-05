@@ -1,6 +1,7 @@
-import React, {useContext, useEffect} from "react";
-import ArticlesList from "./ArticlesList";
-import {Context, mainApi} from "../index";
+import React, {useContext, useEffect} from "react"
+import {mainApi} from '../utils/MainApi'
+import {Context} from "../state/context"
+import ArticlesList from "./ArticlesList"
 
 export default function SavedArticles() {
     const {state, dispatch} = useContext(Context)

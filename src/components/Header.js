@@ -1,5 +1,6 @@
-import React, {useContext, useEffect} from "react";
-import {Context, mainApi} from "../index";
+import React, {useContext, useEffect} from "react"
+import {Context} from "../state/context"
+import {mainApi} from '../utils/MainApi'
 import {NavLink} from 'react-router-dom'
 
 export default function Header () {
@@ -24,7 +25,7 @@ export default function Header () {
                             id: res.data._id,
                         }})
                 })
-                .catch(e => console.log(e)) // TODO обрабатывать ошибки надо через then
+                .catch(e => console.log(e))
         }
         //eslint-disable-next-line
     }, [])
@@ -35,7 +36,7 @@ export default function Header () {
     }
 
     const clearSerchResults = () => {
-        dispatch({type: 'CLEAR_SEARCH_RESULTS'}) // TODO отпимизировать закрытие попапа и очистка поисковых запросов
+        dispatch({type: 'CLEAR_SEARCH_RESULTS'})
     }
 
     const openMobileMenu = () => {

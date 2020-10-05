@@ -1,12 +1,12 @@
 import React, {useContext, useEffect} from "react";
-import HeaderCover from "../HeaderCover";
-import Preloader from "../Preloader";
-import NoArticles from "../NoArticles";
-import SearchResults from "../SearchResults";
-import Author from "../Author";
-import Footer from "../Footer";
-import Popup from "../Popup/Popup";
-import {Context} from "../../index";
+import HeaderCover from "../components/HeaderCover";
+import Preloader from "../components/Preloader";
+import NoArticles from "../components/NoArticles";
+import SearchResults from "../components/SearchResults";
+import Author from "../components/Author";
+import Footer from "../components/Footer";
+import Popup from "../components/popups/Popup";
+import {Context} from "../state/context";
 
 export default function MainPage (props) {
     const {dispatch} = useContext(Context)
