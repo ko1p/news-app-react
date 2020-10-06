@@ -10,7 +10,8 @@
 
 @media screen and (max-width: 767px) {
 	.form__error_server  {
-    left: 60px;
-    top: 270px;
+        height: 13px;
+        left: 30px;
+        top: 275px;
   }
 }

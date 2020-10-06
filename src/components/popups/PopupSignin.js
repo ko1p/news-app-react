@@ -1,6 +1,6 @@
-import React, {useContext, useState} from "react";
-import closeImg from "../../images/close.svg";
-import {Context} from "../../state/context";
+import React, {useContext, useState} from "react"
+import closeImg from "../../images/close.svg"
+import {Context} from "../../state/context"
 import {mainApi} from '../../utils/MainApi'
 
 export default function PopupSignin() {
@@ -97,7 +97,7 @@ export default function PopupSignin() {
                     <div className="form__field">
                         <label className="form__label" htmlFor="signin__email">Email</label>
                         <input onChange={inputHandler} className="form__input" type="email" name="email" id="signin__email"
-                               pattern="[a-z0-9-_]+[@]{1}\w{2,}\.\w{2,}" placeholder="Введите почту" required/>
+                               pattern="[A-Za-z0-9-_]+[@]{1}\w{2,}\.\w{2,}" placeholder="Введите почту" required/>
                         <span className="form__error form__error_email">Неправильный формат email</span>
                     </div>
                     <div className="form__field">

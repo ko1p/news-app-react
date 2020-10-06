@@ -1,10 +1,11 @@
 import React, {useContext} from "react"
 import closeIcon from '../../images/close.svg'
+import logoutIcon from '../../images/logoutIcon.svg'
 import {Context} from "../../state/context"
 import {Link} from "react-router-dom"
 
 export default function PopupMobileMenu() {
-    const {dispatch} = useContext(Context)
+    const {state, dispatch} = useContext(Context)
 
     const closePopup = () => {
         dispatch({type: 'CLOSE_POPUP'})
@@ -23,6 +24,11 @@ export default function PopupMobileMenu() {
         dispatch({type: 'OPEN_SIGNIN_POPUP'})
     }
 
+    const userLogout = () => {
+        localStorage.clear()
+        dispatch({type: 'USER_LOGOUT'})
+    }
+
     return (
         <div className="mobile-menu">
             <div className="mobile-menu__header">
@@ -35,9 +41,18 @@ export default function PopupMobileMenu() {
                 <Link className="mobile-menu__link" to="/articles" onClick={savedArticlesClickHandler}>Сохранённые
                     статьи</Link>
             </nav>
-            <button className="btn mobile-menu__btn mobile-menu__btn-auth mobile-menu__btn"
-                    onClick={openSigninPopup}>Авторизоваться
-            </button>
+            {
+                state.user.isLoggedIn ?
+                    <button className="btn mobile-menu__btn mobile-menu__btn-auth mobile-menu__btn"
+                            onClick={userLogout}
+                    > {state.user.name} <img className='header__logout-image' src={logoutIcon} alt="logout" />
+                    </button>
+                    :
+                    <button className="btn mobile-menu__btn mobile-menu__btn-auth mobile-menu__btn"
+                            onClick={openSigninPopup}
+                    > Авторизоваться
+                    </button>
+            }
             <button className="btn mobile-menu__btn mobile-menu__btn-logout mobile-menu__btn_hide">
                 <svg className="header__logout-image" width="24" height="24" viewBox="0 0 24 24" fill="none"
                      xmlns="http://www.w3.org/2000/svg">

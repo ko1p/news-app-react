@@ -8,6 +8,7 @@ import './vendor/fonts.css'
 import App from './App';
 
 ReactDOM.render(
+    // <BrowserRouter basename="/news-app-react">
     <BrowserRouter>
         <React.StrictMode>
             <App/>

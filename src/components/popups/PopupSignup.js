@@ -78,7 +78,7 @@ export default function PopupSignup() {
                     <div className="form__field">
                         <label className="form__label" htmlFor="signup__email">Email</label>
                         <input onChange={inputHandler} className="form__input" type="email" name="email" id="signup__email"
-                               pattern="[a-z0-9-_]+[@]{1}\w{2,}\.\w{2,}" placeholder="Введите почту" required/>
+                               pattern="[A-Za-z0-9-_]+[@]{1}\w{2,}\.\w{2,}" placeholder="Введите почту" required/>
                         <span className="form__error form__error_email ">Неправильный формат email</span>
                     </div>
                     <div className="form__field">

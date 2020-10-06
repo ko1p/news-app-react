@@ -1,7 +1,6 @@
 import {initialState} from "./initialState"
 import {RENDER_AT_A_TIME} from "../constants/config";
 
-
 export const reducer = (state, action) => {
     switch (action.type) {
         case 'SET_CURRENT_PATH': {
@@ -32,7 +31,8 @@ export const reducer = (state, action) => {
                 popup: {
                     ...state.popup,
                     isOpen: true,
-                    type: action.payload
+                    type: action.payload,
+                    serverError: ''
                 }
             }
         }
@@ -41,7 +41,8 @@ export const reducer = (state, action) => {
                 ...state,
                 popup: {
                     ...state.popup,
-                    isOpen: false
+                    isOpen: false,
+                    serverError: ''
                 }
             }
         }

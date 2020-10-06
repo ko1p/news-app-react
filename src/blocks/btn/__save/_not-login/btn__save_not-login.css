@@ -1,5 +1,11 @@
-@media screen and (min-width: 1180px) {
-	.btn__save_not-login:hover ~ .btn__notice {
-    display: block;
-  }
+/*@media screen and (min-width: 1180px) {*/
+/*	.btn__save_not-login:hover ~ .btn__notice {*/
+/*    display: block;*/
+/*  }*/
+/*}*/
+
+@media screen and (min-width: 320px) and (max-width: 500px) {
+    .btn__save_not-login:hover ~ .btn__notice {
+        display: block;
+    }
 }

@@ -9,3 +9,9 @@
         display: block;
     }
 }
+
+@media screen and (min-width: 345px) and (max-width: 500px) {
+    .article__icon_not-loggined:hover ~ .btn__notice {
+        display: block;
+    }
+}
