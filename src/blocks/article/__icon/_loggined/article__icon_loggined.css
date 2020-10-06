@@ -1,9 +1,0 @@
-.article__icon.article__icon_loggined {
-    background-image: url('../../../../images/saveIcon_not-hovered.svg');
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-.article__icon_loggined:hover {
-    background-image: url('../../../../images/saveIcon_hovered.svg');
-}
