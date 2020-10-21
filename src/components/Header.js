@@ -1,12 +1,14 @@
 import React, {useContext, useEffect} from "react"
+import {useRouteMatch} from 'react-router-dom'
 import {Context} from "../state/context"
 import {mainApi} from '../utils/MainApi'
 import {NavLink} from 'react-router-dom'
 
 export default function Header () {
     const {state, dispatch} = useContext(Context)
-    const path = state.currentPath
     const cls = []
+    const {path} = useRouteMatch()
+
 
     if (path === '/') {
         cls.push('header header_black')
