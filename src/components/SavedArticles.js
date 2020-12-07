@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from "react"
 import {mainApi} from '../utils/MainApi'
 import {Context} from "../state/context"
-import ArticlesList from "./ArticlesList"
+import Article from "./Article";
 
 export default function SavedArticles() {
     const {state, dispatch} = useContext(Context)
@@ -63,7 +63,15 @@ export default function SavedArticles() {
                         <p className="results__keywords">По ключевым словам: {keywordsResultMessage()}</p>
                 }
             </div>
-            <ArticlesList articles={state.savedArticles}/>
+            <div className='articles-list'>
+                {
+                    state.savedArticles.map((article, index) => {
+                        return (
+                            <Article key={`Article-${index}`} article={article}/>
+                        )
+                    })
+                }
+            </div>
         </section>
     )
 }

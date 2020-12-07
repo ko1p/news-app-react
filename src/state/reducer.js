@@ -9,6 +9,24 @@ export const reducer = (state, action) => {
                 currentPath: action.payload
             }
         }
+        case 'SET_SEARCH_ERROR': {
+            return {
+                ...state,
+                results: {
+                    ...state.results,
+                    noResults: true
+                }
+            }
+        }
+        case 'REMOVE_SEARCH_ERROR': {
+            return {
+                ...state,
+                results: {
+                    ...state.results,
+                    noResults: false
+                }
+            }
+        }
         case 'SHOW_LOADER': {
             return {
                 ...state,

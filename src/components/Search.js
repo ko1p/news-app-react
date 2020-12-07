@@ -3,7 +3,6 @@ import {Context} from "../state/context"
 import {newsApi} from "../utils/NewsApi"
 import date from "../utils/date"
 
-
 export default function Search() {
     const {dispatch} = useContext(Context)
 
@@ -12,6 +11,12 @@ export default function Search() {
         newsApi.getNews(keyword)
             .then(res => res.json())
             .then(res => {
+                if (res.totalResults === 0) {
+                    dispatch({type: 'SET_SEARCH_ERROR'})
+                } else {
+                    dispatch({type: 'REMOVE_SEARCH_ERROR'})
+                }
+                console.log(res)
                 const articlesFromApi = res.articles
                 const articles = []
                 articlesFromApi.forEach((article, index) => {

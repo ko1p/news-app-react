@@ -5,7 +5,6 @@ import notFoundImage from '../images/not-found.svg'
 
 export default function NoArticles() {
     const {state} = useContext(Context)
-
     const noResults =
         <div className="no-articles no-articles_is-opened">
             <img className="no-articles__image" src={notFoundImage} alt="ничего не найдено"/>
